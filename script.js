@@ -13,20 +13,18 @@ class StopWatch extends React.Component {
   }
 
   start() {
-    if (!this.timer && this.state.timePassedInMilliSeconds < 9000) {
+    if (!this.timer) {
       let startTime = Date.now();
       this.timer = setInterval(() => {
         const stopTime = Date.now();
         const timePassedInMilliSeconds = stopTime - startTime + this.state.timePassedInMilliSeconds;
-
-        if (timePassedInMilliSeconds >= 9000) {
-          this.setState({ timePassedInMilliSeconds: 9000 });
-          this.stop(); // Auto-stop after 9 seconds
-        } else {
-          this.setState({ timePassedInMilliSeconds });
-          startTime = stopTime;
-        }
-      }, 250);
+  
+        this.setState({
+          timePassedInMilliSeconds,
+        });
+        
+        startTime = stopTime;
+      }, 250); // Executed every 250 millisecond
     }
   }
 
